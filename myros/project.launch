@@ -1,0 +1,5 @@
+<launch>
+<node name = "sensors" pkg = "myros" type = "sensors.py" />
+<node name = "brain" pkg = "myros" type = "brain.py" />
+<node name = "action" pkg = "myros" type = "act.py" />
+</launch>
