@@ -14,8 +14,9 @@ BACKWARD = "backward"
 STOP = "stop"
 END = "end"
 
-# threshold distanza del sensore ultrasuoni
-DISTANCE = 10
+# threshold distanza dell'ostacolo dal sensore ultrasuoni
+DISTANCE_FORWARD = 10
+DISTANCE_LATERAL = 15
 
 # costanti per stati
 UNABLE_TO_MOVE = -1
@@ -47,9 +48,9 @@ class Brain:
         if self.state == 0:
             #valutare qual'è lo stato in base ai sensori
             
-            if data.linetracking > 0 and data.ultrasonic > DISTANCE:
+            if data.linetracking > 0 and data.ultrasonic > DISTANCE_FORWARD:
                 self.state = LINE_TRACKING
-            elif data.linetracking > 0 and data.ultrasonic <=DISTANCE:
+            elif data.linetracking > 0 and data.ultrasonic <= DISTANCE_FORWARD:
                 self.state = CHECK_OBSTACLE
             else:
                 # impossibile definire lo stato iniziale, per cui non possiamo definire una mossa
@@ -59,7 +60,7 @@ class Brain:
                     
             if self.state == LINE_TRACKING:
                 
-                if data.ultrasonic >DISTANCE:
+                if data.ultrasonic > DISTANCE_FORWARD:
                     #non ho ostacoli davanti quindi continuo a seguire la linea
                     
                     if data.linetracking==2:
@@ -90,7 +91,7 @@ class Brain:
                     
                 elif self.servorotation == 45:
                     
-                    if data.ultrasonic > DISTANCE:
+                    if data.ultrasonic > DISTANCE_LATERAL:
                     
                         self.state = AVOID_OBSTACLE
                         self.turn = LEFT
@@ -104,7 +105,7 @@ class Brain:
                     
                 elif self.servorotation == 135:
                     
-                    if data.ultrasonic > DISTANCE:
+                    if data.ultrasonic > DISTANCE_LATERAL:
                     
                         self.state = AVOID_OBSTACLE
                         self.turn = RIGHT
@@ -152,9 +153,15 @@ class Brain:
         if self.lastmove != END:
         
             self.lastmove = message    
-            rospy.loginfo(rospy.get_caller_id() + "Ultrasuono " + str(data.ultrasonic) + " line " + str(data.linetracking))
+            rospy.loginfo(" Ho ricevuto dai sensori: ultrasuono " + str(data.ultrasonic) + " line " + str(data.linetracking) + " e ho deciso " + str(message))
             pub.publish(message)
             rate.sleep()
+            
+        else:
+            self.endSimulation()
+            
+    def endSimulation(self):
+        rospy.signal_shutdown("La simulazione è terminata")
             
 
     def listenToSensors(self):

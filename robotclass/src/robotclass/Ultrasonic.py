@@ -35,5 +35,4 @@ class Ultrasonic:
             pulse_len = finish-start
             distance_cm[i] = pulse_len/0.000058
         distance_cm=sorted(distance_cm)
-        rospy.loginfo("il sensore rileva "+ str(distance_cm))
         return int(distance_cm[1])

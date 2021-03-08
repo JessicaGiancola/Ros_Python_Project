@@ -21,13 +21,13 @@ class Act:
     motors = None
     servo = None
     buzzer = None
-    servorotation = [45, 90, 135]
+    servorotation = [35, 78, 125]
     
     def __init__(self):
         self.motors = Motor()
         self.servo = Servo()
         self.servo.setServoPwm('0', self.servorotation[1])
-        self.servo.setServoPwm('1', self.servorotation[1])
+        self.servo.setServoPwm('1', 100)
     
     def execute(self, data):
         # in base al messaggio che ricevo, setto i motori o il servo0
@@ -39,7 +39,6 @@ class Act:
             self.motors.setMotorModel(1500,1500,-2500,-2500)
              
         elif data.data == RIGHT:
-            rospy.loginfo("ha settato il motore")
             self.motors.setMotorModel(-2500,-2500,1500,1500)
              
         elif data.data == (FORWARD + SEPARATOR + RIGHT):
@@ -65,14 +64,15 @@ class Act:
             
         elif data.data == END:
             self.motors.destroy()
+            self.servo.setServoPwm('0',self.servorotation[1])
 
             
-        rospy.loginfo(rospy.get_caller_id() + 'I heard %s', data.data)
+         # rospy.loginfo(' Dal brain ho ricevuto l\'istruzione ' + data.data)
 
     def listenToBrain(self):
          # inizializzo il nodo act come listener sul topic 'azioni'
         rospy.Subscriber('azioni', String, self.execute)
-        # spin() simply keeps python from exiting until this node is stopped
+         # spin() simply keeps python from exiting until this node is stopped
         rospy.spin()
 
 if __name__ == '__main__':

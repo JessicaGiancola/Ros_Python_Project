@@ -28,9 +28,9 @@ class Sensors:
             message = Sensor()
             message.ultrasonic = self.ultrasonic.get_distance()
             message.linetracking = self.linetrack.run()
-            rospy.loginfo(" messaggio " + str(message))
+           # rospy.loginfo(" I sensori hanno letto " + str(message))
             pub.publish(message)
-            rate.sleep()
+            rate.sleep()        
             
 
 if __name__ == '__main__':
