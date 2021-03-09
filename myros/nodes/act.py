@@ -20,7 +20,6 @@ class Act:
     
     motors = None
     servo = None
-    buzzer = None
     servorotation = [35, 78, 125]
     
     def __init__(self):

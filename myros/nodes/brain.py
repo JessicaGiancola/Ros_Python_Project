@@ -16,13 +16,15 @@ END = "end"
 
 # threshold distanza dell'ostacolo dal sensore ultrasuoni
 DISTANCE_FORWARD = 10
-DISTANCE_LATERAL = 15
+DISTANCE_LATERAL = 18
 
 # costanti per stati
 UNABLE_TO_MOVE = -1
+INIT_STATE = 0
 LINE_TRACKING = 1
 CHECK_OBSTACLE = 2
 AVOID_OBSTACLE = 3
+END_SIMULATION = 4
 
 
 class Brain:
@@ -36,7 +38,7 @@ class Brain:
     def __init__(self):
         
         self.lastmove = ""
-        self.state = 0
+        self.state = INIT_STATE
         self.servorotation = 90
         
     def elaborates(self, data):
@@ -45,7 +47,7 @@ class Brain:
         rate = rospy.Rate(10) # 10hz
         message = String()
         
-        if self.state == 0:
+        if self.state == INIT_STATE:
             #valutare qual'è lo stato in base ai sensori
             
             if data.linetracking > 0 and data.ultrasonic > DISTANCE_FORWARD:
@@ -114,7 +116,7 @@ class Brain:
                     
                     else:
                         # non posso aggirarlo, quindi termino il programma
-                        self.state = UNABLE_TO_MOVE
+                        self.state = END_SIMULATION
                         message = END
                     
             
@@ -147,7 +149,10 @@ class Brain:
                             
             elif self.state == UNABLE_TO_MOVE:
                 # tentiamo di reinizializzare lo stato all'iterazione successiva
-                self.state = 0
+                self.state = INIT_STATE
+
+            elif self.state == END_SIMULATION:
+                self.endSimulation()
            
         # mando i messaggi all'act se non ho terminato il programma
         if self.lastmove != END:
