@@ -15,8 +15,8 @@ STOP = "stop"
 END = "end"
 
 # threshold distanza dell'ostacolo dal sensore ultrasuoni
-DISTANCE_FORWARD = 10
-DISTANCE_LATERAL = 18
+DISTANCE_FORWARD = 15
+DISTANCE_LATERAL = 20
 
 # costanti per stati
 UNABLE_TO_MOVE = -1

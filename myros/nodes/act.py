@@ -20,7 +20,7 @@ class Act:
     
     motors = None
     servo = None
-    servorotation = [35, 78, 125]
+    servorotation = [33, 78, 123]
     
     def __init__(self):
         self.motors = Motor()
