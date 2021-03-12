@@ -13,7 +13,7 @@ Lo potete acquistare a questo link:<br>
 https://www.amazon.it/Freenove-Raspberry-Tracking-Avoidance-Ultrasonic/dp/B07YD2LT9D?ref_=ast_sto_dp
 
 # Installazione 
-Per iniziare, occorre avere una micro SD card da almeno 8GB sul quale andrete a installare il sistema operativo per il vostro Raspberry.<br>
+Per iniziare, occorre avere una micro SD card da almeno 8GB sulla quale andrete a installare il sistema operativo per il vostro Raspberry.<br>
 Potrete installarlo utilizzando il Raspberry Pi Imager scaricabile a questo link:<br>
 https://www.raspberrypi.org/software/<br>
 Noi abbiamo installato il sistema operativo Ubuntu 20.04 LTS Focal 32-bit per architetture armhf. <br>
