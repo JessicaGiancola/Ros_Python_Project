@@ -1,4 +1,4 @@
-# Ros Python Project
+# <b>Ros Python Project</b>
 
 [![Python 3.8](https://img.shields.io/badge/Python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![ROS](https://img.shields.io/badge/Ros-noetic-green.svg)](http://wiki.ros.org/noetic)
@@ -49,8 +49,20 @@ Se volete visualizzare i log, potrete farlo aprendo in un altro terminale la con
 ```markdown
 rosrun rqt_console rqt_console
 ```
+
+# <em>Importante!</em>
+Dopo aver aggiunto file al progetto, è necessario modificare opportunamente i file CMakeLists.txt e package.xml nella cartella myros. Per sapere come, consulta la guida di ROS:<br>
+http://wiki.ros.org/ROS/Tutorials
+
+Successivamente è necessario recarsi nella directory del catkin workspace da terminale e lanciare il comando:
+```markdown
+catkin_make
+```
+
 # Conclusioni
 A causa di un malfunzionamento del robot durante lo sviluppo di questo progetto, non abbiamo potuto testare a pieno il nostro codice, quindi <b>NON GARANTIAMO</b> un corretto funzionamento del programma.
+
+
 <!---
 Code
 ```markdown
